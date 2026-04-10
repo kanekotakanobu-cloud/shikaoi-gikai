@@ -282,7 +282,7 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
 
   <div class="sec">
     <div class="sec-hd"><h2 class="sec-ttl">議会からのお知らせ</h2><button class="sec-more" onclick="goto('oshirase')">もっと見る</button></div>
-    <div class="news-list">
+    <div class="news-list" id="news-list-home">
       <div class="nc" onclick="goto('news-detail')">
         <div class="nc-meta"><div class="nc-date">2026年1月26日</div><div class="nc-ttl">しかおい議会だより第169号を掲載しました</div></div>
         <span class="badge">新着</span>
@@ -587,7 +587,7 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
   </div>
   <div class="sec">
     <div class="sec-hd" style="padding-top:0"><h2 class="sec-ttl">最新のお知らせ</h2></div>
-    <div class="news-list">
+    <div class="news-list" id="news-list-home">
       <div class="nc" onclick="goto('news-detail')">
         <div class="nc-meta"><div class="nc-date">2026年1月26日</div><div class="nc-ttl">しかおい議会だより第169号を掲載しました</div></div>
         <span class="badge">新着</span>
@@ -796,5 +796,75 @@ if(sessionStorage.getItem('gikai-auth')==='ok'){
 
 window.onload=()=>document.getElementById('pw-input').focus();
 </script>
+
+<script>
+// ── スプレッドシート連携 ──
+const API_URL = 'https://script.google.com/macros/s/AKfycbxQirguOBpiZfwox1beMGqldHBqFro1b2MXLktC8NTBrTRorlxgpE2aLT6nwZTU5wukaA/exec';
+
+function loadNews() {
+  const containers = ['news-list-home', 'news-list-oshirase'];
+  
+  fetch(API_URL)
+    .then(r => r.json())
+    .then(data => {
+      containers.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        
+        if (!data || data.length === 0) {
+          el.innerHTML = '<div class="nc" style="padding:20px;color:#aeaeb2;text-align:center">お知らせはありません</div>';
+          return;
+        }
+        
+        const limit = id === 'news-list-home' ? 3 : 10;
+        el.innerHTML = data.slice(0, limit).map((item, i) => {
+          const badgeHtml = i === 0 && id === 'news-list-home'
+            ? '<span class="badge">新着</span>'
+            : item.category === 'イベント'
+            ? '<span class="badge ev">イベント</span>'
+            : '<span class="nc-arr">›</span>';
+          
+          return `
+            <div class="nc" onclick="goto('news-detail')">
+              <div class="nc-meta">
+                <div class="nc-date">${formatDateJP(item.date)}</div>
+                <div class="nc-ttl">${item.title}</div>
+              </div>
+              ${badgeHtml}
+            </div>`;
+        }).join('');
+      });
+    })
+    .catch(err => {
+      console.log('API読み込みエラー:', err);
+    });
+}
+
+function formatDateJP(d) {
+  if (!d) return '';
+  const parts = d.split('/');
+  if (parts.length < 3) return d;
+  return `${parts[0]}年${parseInt(parts[1])}月${parseInt(parts[2])}日`;
+}
+
+// 認証後にニュースを読み込む
+const _origCheckPw = window.checkPw;
+window.addEventListener('load', () => {
+  if (sessionStorage.getItem('gikai-auth') === 'ok') {
+    loadNews();
+  }
+});
+
+// checkPw関数を拡張
+const origCheckPw = window.checkPw;
+window.checkPw = function() {
+  const input = document.getElementById('pw-input').value;
+  if (input === 'shikaoi2026') {
+    loadNews();
+  }
+  origCheckPw();
+};
+</script>
+
 </body>
 </html>
