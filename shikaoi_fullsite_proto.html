@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鹿追町議会</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f5f7;--surface:#fff;--text:#1d1d1f;--text2:#6e6e73;--text3:#aeaeb2;
+  --accent:#0071e3;--accent-l:#e8f0fd;--green:#1d8348;--green-l:#e8f5ee;
+  --border:rgba(0,0,0,.08);--sh1:0 2px 8px rgba(0,0,0,.06);--sh2:0 8px 32px rgba(0,0,0,.10);
+  --r2:16px;--r3:24px;--r4:32px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-size:16px}
+body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;background:rgba(245,245,247,.88);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 20px}
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;cursor:pointer}
+.nav-mark{width:28px;height:28px;background:var(--text);border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700}
+.nav-name{font-size:15px;font-weight:600;color:var(--text);letter-spacing:-.3px}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-back{display:none;align-items:center;gap:4px;background:none;border:none;color:var(--accent);font-size:15px;font-weight:500;font-family:inherit;cursor:pointer;padding:4px 0}
+.nav-back svg{width:16px;height:16px}
+.nav-search{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;color:var(--text2)}
+
+/* ── PAGES ── */
+.page{display:none;padding-top:52px;min-height:100vh;padding-bottom:80px;animation:fadeUp .35s ease both}
+.page.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── BREADCRUMB ── */
+.breadcrumb{padding:12px 20px;display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text3);flex-wrap:wrap}
+.breadcrumb a{color:var(--accent);text-decoration:none;font-weight:500}
+.breadcrumb span{color:var(--text3)}
+
+/* ── PAGE HERO (subpage) ── */
+.page-hero{padding:28px 20px 24px;border-bottom:1px solid var(--border);background:var(--surface)}
+.page-hero h1{font-family:'Noto Serif JP',serif;font-size:26px;font-weight:600;letter-spacing:-.4px;margin-bottom:8px}
+.page-hero p{font-size:14px;color:var(--text2);line-height:1.7}
+
+/* ── SECTION ── */
+.sec{padding:0 20px;margin-bottom:32px}
+.sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-top:28px}
+.sec-ttl{font-size:20px;font-weight:700;letter-spacing:-.4px}
+.sec-more{font-size:14px;color:var(--accent);text-decoration:none;font-weight:500;background:none;border:none;cursor:pointer;font-family:inherit}
+
+/* ── HOME HERO ── */
+.home-hero{padding:48px 20px 36px;text-align:center}
+.eyebrow{display:inline-block;font-size:12px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.home-hero h1{font-family:'Noto Serif JP',serif;font-size:clamp(28px,7vw,40px);font-weight:600;letter-spacing:-.5px;line-height:1.25;margin-bottom:12px}
+.home-hero p{font-size:15px;color:var(--text2);line-height:1.6;max-width:320px;margin:0 auto 24px}
+.hero-btn{display:inline-flex;align-items:center;gap:6px;background:var(--accent);color:#fff;border:none;padding:12px 22px;border-radius:980px;font-size:15px;font-weight:500;font-family:inherit;cursor:pointer;text-decoration:none;box-shadow:0 4px 16px rgba(0,113,227,.3)}
+
+/* ── BANNER ── */
+.banner{margin:0 20px 20px;background:var(--surface);border-radius:var(--r2);padding:16px 20px;display:flex;align-items:center;gap:14px;box-shadow:var(--sh1);border:1px solid var(--border);cursor:pointer}
+.ban-icon{width:40px;height:40px;flex-shrink:0;background:var(--accent-l);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.ban-body{flex:1;min-width:0}
+.ban-date{font-size:11px;color:var(--text3);font-weight:500;margin-bottom:2px}
+.ban-title{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ban-arr{color:var(--text3);font-size:20px;flex-shrink:0}
+
+/* ── QUICK GRID ── */
+.quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.qc{background:var(--surface);border-radius:var(--r2);padding:16px 10px 14px;text-align:center;border:none;box-shadow:var(--sh1);border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;font-family:inherit;transition:transform .15s,box-shadow .15s}
+.qc:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
+.qi{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.ql{font-size:11px;font-weight:600;line-height:1.3;color:var(--text)}
+.ib{background:#e8f0fd}.ig{background:#e8f5ee}.io{background:#fff3e6}.ip{background:#f3eefe}
+.it{background:#e5f5f8}.ir{background:#fdeaed}.igr{background:#f0f0f5}.iy{background:#fdf9e6}.ipk{background:#fde9f3}
+
+/* ── NEWS LIST ── */
+.news-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border-radius:var(--r2);overflow:hidden;box-shadow:var(--sh1)}
+.nc{background:var(--surface);padding:16px 20px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:background .15s}
+.nc:hover{background:#fafafa}
+.nc-meta{min-width:0;flex:1}
+.nc-date{font-size:11px;color:var(--text3);font-weight:500;margin-bottom:3px}
+.nc-ttl{font-size:14px;font-weight:500;line-height:1.45}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600;background:var(--accent-l);color:var(--accent);flex-shrink:0}
+.badge.ev{background:var(--green-l);color:var(--green)}
+.nc-arr{color:var(--text3);font-size:18px;flex-shrink:0}
+
+/* ── MEMBER CARDS ── */
+.mem-scroll{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none}
+.mem-scroll::-webkit-scrollbar{display:none}
+.mc{flex-shrink:0;width:136px;background:var(--surface);border-radius:var(--r2);overflow:hidden;box-shadow:var(--sh1);border:1px solid var(--border);cursor:pointer;transition:transform .15s,box-shadow .15s}
+.mc:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
+.mc img{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:var(--bg)}
+.mc-ph{width:100%;aspect-ratio:1;background:linear-gradient(135deg,#e8eaf0,#d0d3de);display:none;align-items:center;justify-content:center;font-size:36px;color:#9fa3b0}
+.mc-info{padding:10px 12px}
+.mc-num{font-size:10px;color:var(--text3);font-weight:600;margin-bottom:2px}
+.mc-name{font-size:13px;font-weight:700;margin-bottom:3px;line-height:1.2}
+.mc-role{font-size:10px;color:var(--accent);font-weight:600}
+
+/* ── ABOUT PAGE ── */
+.about-lead{padding:20px;background:var(--surface);border-bottom:1px solid var(--border);font-size:15px;line-height:1.8;color:var(--text2)}
+.toc-card{margin:20px;background:var(--surface);border-radius:var(--r2);overflow:hidden;box-shadow:var(--sh1);border:1px solid var(--border)}
+.toc-item{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s}
+.toc-item:last-child{border-bottom:none}
+.toc-item:hover{background:#fafafa}
+.toc-num{width:24px;height:24px;border-radius:50%;background:var(--accent-l);color:var(--accent);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.toc-label{font-size:14px;font-weight:500;flex:1}
+.toc-arr{color:var(--text3);font-size:18px}
+
+.info-block{margin:0 20px 20px;background:var(--surface);border-radius:var(--r2);padding:20px;box-shadow:var(--sh1);border:1px solid var(--border)}
+.info-block h3{font-size:17px;font-weight:700;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.info-block p{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:12px}
+.info-block p:last-child{margin-bottom:0}
+.info-link-btn{display:flex;align-items:center;justify-content:space-between;background:var(--bg);border-radius:10px;padding:12px 16px;margin-top:12px;cursor:pointer;border:none;font-family:inherit;width:100%;transition:background .15s}
+.info-link-btn:hover{background:#e8e8ed}
+.info-link-btn span{font-size:13px;font-weight:600;color:var(--accent)}
+
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 20px 20px}
+.stat-card{background:var(--surface);border-radius:var(--r2);padding:20px 16px;text-align:center;box-shadow:var(--sh1);border:1px solid var(--border)}
+.stat-num{font-family:'Noto Serif JP',serif;font-size:32px;font-weight:600;color:var(--accent);letter-spacing:-.5px;line-height:1}
+.stat-unit{font-size:13px;color:var(--text2);margin-top:4px}
+.stat-label{font-size:11px;color:var(--text3);margin-top:6px;font-weight:500}
+
+/* ── MEMBER PAGE ── */
+.member-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.mg-card{background:var(--surface);border-radius:var(--r2);overflow:hidden;box-shadow:var(--sh1);border:1px solid var(--border);cursor:pointer;transition:transform .15s,box-shadow .15s}
+.mg-card:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
+.mg-card img{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:var(--bg)}
+.mg-ph{width:100%;aspect-ratio:1;background:linear-gradient(135deg,#e8eaf0,#d0d3de);display:none;align-items:center;justify-content:center;font-size:48px;color:#9fa3b0}
+.mg-info{padding:14px}
+.mg-num{font-size:10px;color:var(--text3);font-weight:600;margin-bottom:3px}
+.mg-name{font-size:15px;font-weight:700;margin-bottom:4px}
+.mg-role{font-size:11px;color:var(--accent);font-weight:600;margin-bottom:8px}
+.mg-tags{display:flex;flex-wrap:wrap;gap:4px}
+.mg-tag{font-size:10px;background:var(--bg);color:var(--text2);padding:2px 8px;border-radius:20px;font-weight:500}
+
+/* ── IPPAN PAGE ── */
+.year-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border-radius:var(--r2);overflow:hidden;box-shadow:var(--sh1)}
+.yr-item{background:var(--surface);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:background .15s}
+.yr-item:hover{background:#fafafa}
+.yr-left{display:flex;align-items:center;gap:12px}
+.yr-badge{width:36px;height:36px;border-radius:10px;background:var(--accent-l);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.yr-label{font-size:15px;font-weight:600}
+.yr-sub{font-size:12px;color:var(--text3);margin-top:2px}
+.yr-arr{color:var(--text3);font-size:18px}
+.yr-item.current .yr-badge{background:var(--accent);color:#fff}
+.yr-item.current .yr-label{color:var(--accent)}
+
+/* ── CONTACT BLOCK ── */
+.contact-card{background:linear-gradient(135deg,#1d1d1f,#2d2d2f);border-radius:var(--r4);padding:28px 24px;text-align:center;color:#fff;margin:20px}
+.contact-card h3{font-size:20px;font-weight:700;margin-bottom:6px}
+.contact-card p{font-size:13px;color:rgba(255,255,255,.6);margin-bottom:20px;line-height:1.6}
+.con-btn{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--text);border:none;padding:12px 24px;border-radius:980px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer}
+.con-tel{margin-top:14px;font-size:12px;color:rgba(255,255,255,.5)}
+.con-tel a{color:rgba(255,255,255,.8);text-decoration:none;font-weight:600}
+
+/* ── PDF LIST ── */
+.pdf-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border-radius:var(--r2);overflow:hidden;box-shadow:var(--sh1)}
+.pdf-item{background:var(--surface);padding:14px 20px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:background .15s}
+.pdf-item:hover{background:#fafafa}
+.pdf-icon{width:36px;height:36px;background:#fdeaed;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.pdf-label{font-size:14px;font-weight:500;flex:1}
+.pdf-size{font-size:11px;color:var(--text3)}
+
+/* ── TAB BAR ── */
+.tabs{position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(245,245,247,.92);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-top:1px solid var(--border);padding:8px 0 max(8px,env(safe-area-inset-bottom));display:flex;justify-content:space-around;align-items:center}
+.ti{display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 14px;border:none;background:none;cursor:pointer;font-family:inherit;border-radius:10px;transition:background .15s}
+.ti:hover{background:var(--border)}
+.ti-icon{font-size:22px;line-height:1}
+.ti-lbl{font-size:10px;font-weight:500;color:var(--text3)}
+.ti.active .ti-lbl{color:var(--accent);font-weight:700}
+
+@media(min-width:600px){
+  .nav,.tabs{max-width:600px;left:50%;transform:translateX(-50%);right:auto;width:100%}
+  .page{max-width:600px;margin:0 auto}
+  .quick-grid{grid-template-columns:repeat(6,1fr)}
+  .member-grid{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo" onclick="goHome()">
+    <div class="nav-mark">鹿</div>
+    <span class="nav-name">鹿追町議会</span>
+  </div>
+  <div class="nav-right">
+    <button class="nav-back" id="nav-back" onclick="goBack()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      戻る
+    </button>
+    <button class="nav-search" aria-label="検索">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════════ HOME ══════════════ -->
+<div class="page active" id="page-home">
+  <div class="home-hero">
+    <span class="eyebrow">北海道 十勝 鹿追町</span>
+    <h1>町民とともに<br>開かれた議会へ</h1>
+    <p>鹿追町議会は皆さんの声を町政に届けます。会議の傍聴・中継はいつでも無料でご覧いただけます。</p>
+    <button class="hero-btn" onclick="goto('chukei')">議会中継を見る ›</button>
+  </div>
+
+  <div class="banner" onclick="goto('news-detail')">
+    <div class="ban-icon">📰</div>
+    <div class="ban-body">
+      <div class="ban-date">2026年1月26日 — 最新情報</div>
+      <div class="ban-title">しかおい議会だより第169号を掲載しました</div>
+    </div>
+    <span class="ban-arr">›</span>
+  </div>
+
+  <div class="sec">
+    <div class="sec-hd"><h2 class="sec-ttl">メニュー</h2></div>
+    <div class="quick-grid">
+      <button class="qc" onclick="goto('oshirase')"><div class="qi ib">📋</div><span class="ql">お知らせ</span></button>
+      <button class="qc" onclick="goto('about')"><div class="qi ig">🏛️</div><span class="ql">議会について</span></button>
+      <button class="qc" onclick="goto('ippan')"><div class="qi io">🎤</div><span class="ql">一般質問</span></button>
+      <button class="qc" onclick="goto('calendar')"><div class="qi ip">📅</div><span class="ql">カレンダー</span></button>
+      <button class="qc" onclick="goto('chukei')"><div class="qi it">📡</div><span class="ql">議会中継</span></button>
+      <button class="qc" onclick="goto('seigan')"><div class="qi ir">📬</div><span class="ql">請願・陳情</span></button>
+      <button class="qc" onclick="goto('nittei')"><div class="qi igr">📝</div><span class="ql">議事日程</span></button>
+      <button class="qc" onclick="goto('machinaka')"><div class="qi iy">💬</div><span class="ql">まちなか会議</span></button>
+      <button class="qc" onclick="goto('gijiroku')"><div class="qi ipk">🔍</div><span class="ql">会議録</span></button>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-hd"><h2 class="sec-ttl">議会からのお知らせ</h2><button class="sec-more" onclick="goto('oshirase')">もっと見る</button></div>
+    <div class="news-list">
+      <div class="nc" onclick="goto('news-detail')">
+        <div class="nc-meta"><div class="nc-date">2026年1月26日</div><div class="nc-ttl">しかおい議会だより第169号を掲載しました</div></div>
+        <span class="badge">新着</span>
+      </div>
+      <div class="nc" onclick="goto('news-detail')">
+        <div class="nc-meta"><div class="nc-date">2026年1月6日</div><div class="nc-ttl">2/24 議員と語り合う「カフェでひとこと」を平成館で開催します</div></div>
+        <span class="badge ev">イベント</span>
+      </div>
+      <div class="nc" onclick="goto('news-detail')">
+        <div class="nc-meta"><div class="nc-date">2025年10月20日</div><div class="nc-ttl">しかおい議会だより第168号を掲載しました</div></div>
+        <span class="nc-arr">›</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-hd"><h2 class="sec-ttl">議員名簿</h2><button class="sec-more" onclick="goto('meibo')">全員を見る</button></div>
+    <div class="mem-scroll">
+      <div class="mc" onclick="goto('meibo')">
+        <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3841/uesimakazusi.jpg" alt="上嶋和志" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+        <div class="mc-ph">👤</div>
+        <div class="mc-info"><div class="mc-num">11番</div><div class="mc-name">上嶋 和志</div><div class="mc-role">議長</div></div>
+      </div>
+      <div class="mc" onclick="goto('meibo')">
+        <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3828/simizuhironori.jpg" alt="清水浩徳" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+        <div class="mc-ph">👤</div>
+        <div class="mc-info"><div class="mc-num">10番</div><div class="mc-name">清水 浩徳</div><div class="mc-role">副議長</div></div>
+      </div>
+      <div class="mc" onclick="goto('meibo')">
+        <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3867/kanekotakanobu.jpg" alt="金子孝伸" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+        <div class="mc-ph">👤</div>
+        <div class="mc-info"><div class="mc-num">3番</div><div class="mc-name">金子 孝伸</div><div class="mc-role">総務文教委員</div></div>
+      </div>
+      <div class="mc" onclick="goto('meibo')">
+        <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3862/andoumikio.jpg" alt="安藤幹夫" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+        <div class="mc-ph">👤</div>
+        <div class="mc-info"><div class="mc-num">9番</div><div class="mc-name">安藤 幹夫</div><div class="mc-role">議運委員長</div></div>
+      </div>
+      <div class="mc" onclick="goto('meibo')">
+        <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3817/yamagutiyuuko.jpg" alt="山口優子" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+        <div class="mc-ph">👤</div>
+        <div class="mc-info"><div class="mc-num">5番</div><div class="mc-name">山口 優子</div><div class="mc-role">総務文教委員長</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-card">
+    <h3>議会へのお問い合わせ</h3>
+    <p>ご意見・ご要望・傍聴のお申し込みは<br>議会事務局までお気軽にどうぞ</p>
+    <button class="con-btn" onclick="goto('contact')">📩 お問い合わせフォーム</button>
+    <div class="con-tel">電話: <a href="tel:0156664039">0156-66-4039</a></div>
+  </div>
+</div>
+
+<!-- ══════════════ 議会について ══════════════ -->
+<div class="page" id="page-about">
+  <div class="breadcrumb"><a onclick="goHome()">ホーム</a><span>›</span><span>議会について</span></div>
+  <div class="page-hero">
+    <h1>鹿追町議会について</h1>
+    <p>町議会は、町政の在り方や進め方の基本を決定する機関です。条例の制定・改廃、予算の決定、決算の認定などを行います。</p>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card"><div class="stat-num">11</div><div class="stat-unit">人</div><div class="stat-label">議員定数</div></div>
+    <div class="stat-card"><div class="stat-num">4</div><div class="stat-unit">年</div><div class="stat-label">議員任期</div></div>
+    <div class="stat-card"><div class="stat-num">4</div><div class="stat-unit">回</div><div class="stat-label">年間定例会</div></div>
+    <div class="stat-card"><div class="stat-num">3</div><div class="stat-unit">つ</div><div class="stat-label">常任委員会</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-hd" style="padding-top:0"><h2 class="sec-ttl">詳しく知る</h2></div>
+    <div class="toc-card">
+      <div class="toc-item"><div class="toc-num">1</div><span class="toc-label">町議会の役目としくみ</span><span class="toc-arr">›</span></div>
+      <div class="toc-item"><div class="toc-num">2</div><span class="toc-label">請願と陳情</span><span class="toc-arr">›</span></div>
+      <div class="toc-item"><div class="toc-num">3</div><span class="toc-label">議会の傍聴</span><span class="toc-arr">›</span></div>
+      <div class="toc-item" onclick="goto('gaiyou')"><div class="toc-num">4</div><span class="toc-label">鹿追町と議会の概要（PDF）</span><span class="toc-arr">›</span></div>
+    </div>
+  </div>
+
+  <div class="info-block">
+    <h3>🏛️ 町議会の役目としくみ</h3>
+    <p>町議会では、町民の直接選挙によって選ばれた議員で構成されています。鹿追町議会の議員定数は11人、任期は4年です。</p>
+    <p>総務文教常任委員会、産業厚生常任委員会、広報広聴常任委員会の3つの常任委員会と議会運営委員会、また必要に応じて設けられる特別委員会があります。</p>
+    <p>定例会は3月・6月・9月・12月の年4回開催されます。</p>
+    <button class="info-link-btn" onclick="goto('meibo')"><span>議員名簿を見る</span><span style="color:var(--text3)">›</span></button>
+  </div>
+
+  <div class="info-block">
+    <h3>📬 請願と陳情</h3>
+    <p>町政などに関することは、文書で請願（紹介議員が必要）あるいは陳情することができます。要旨をできるだけ簡潔に書いて提出してください。</p>
+    <button class="info-link-btn" onclick="goto('seigan')"><span>請願・陳情の手続きを見る</span><span style="color:var(--text3)">›</span></button>
+  </div>
+
+  <div class="info-block">
+    <h3>👁 議会の傍聴</h3>
+    <p>議会は秘密会を除いて、傍聴することができます。希望する方は議場へお越しください。庁舎1階ロビーでは本議会や委員会のモニター放映も行っています。</p>
+    <button class="info-link-btn" onclick="goto('chukei')"><span>オンライン中継を見る</span><span style="color:var(--text3)">›</span></button>
+  </div>
+
+  <div class="contact-card">
+    <h3>お問い合わせ</h3>
+    <p>議会事務局</p>
+    <button class="con-btn">📞 0156-66-4039</button>
+  </div>
+</div>
+
+<!-- ══════════════ 議員名簿 ══════════════ -->
+<div class="page" id="page-meibo">
+  <div class="breadcrumb"><a onclick="goHome()">ホーム</a><span>›</span><span>議員名簿</span></div>
+  <div class="page-hero">
+    <h1>議員名簿</h1>
+    <p>令和7年1月1日現在。鹿追町議会議員10名（6番欠番）。</p>
+  </div>
+
+  <div class="sec">
+    <div class="sec-hd" style="padding-top:0"><h2 class="sec-ttl">議員一覧</h2></div>
+    <div class="member-grid">
+
+      <div class="mg-card">
+        <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3841/uesimakazusi.jpg" alt="上嶋和志" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+        <div class="mg-ph">👤</div>
+        <div class="mg-info">
+          <div class="mg-num">11番</div>
+          <div class="mg-name">上嶋 和志</div>
+          <div class="mg-role">議長</div>
+          <div class="mg-tags"><span class="mg-tag">無所属</span><span class="mg-tag">当選5回</span></div>
+        </div>
+      </div>
+
+      <div class="mg-card">
+        <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3828/simizuhironori.jpg" alt="清水浩徳" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+        <div class="mg-ph">👤</div>
+        <div class="mg-info">
+          <div class="mg-num">10番</div>
+          <div class="mg-name">清水 浩徳</div>
+          <div class="mg-role">副議長</div>
+          <div class="mg-tags"><span class="mg-tag">無所属</span><span class="mg-tag">当選2回</span></div>
+        </div>
+      </div>
+
+      <div class="mg-card">
+        <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3862/andoumikio.jpg" alt="安藤幹夫" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+        <div class="mg-ph">👤</div>
+        <div class="mg-info">
+          <div class="mg-num">9番</div>
+          <div class="mg-name">安藤 幹夫</div>
+          <div class="mg-role">議運委員長</div>
+          <div class="mg-tags"><span class="mg-tag">無所属</span><span class="mg-tag">当選6回</span></div>
+        </div>
+      </div>
+
+      <div class="mg-card">
+        <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3852/karinomasao.jpg" alt="狩野正雄" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+        <div class="mg-ph">👤</div>
+        <div class="mg-info">
+          <div class="mg-num">8番</div>
+          <div class="mg-name">狩野 正雄</div>
+          <div class="mg-role">広報委員長</div>
+          <div class="mg-tags"><span class="mg-tag">無所属</span><span class="mg-tag">当選6回</span></div>
+        </div>
+      </div>
+
+      <div class="mg-card">
+        <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3848/kawaseomehirosi.jpg" alt="川染洋" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+        <div class="mg-ph">👤</div>
+        <div class="mg-info">
+          <div class="mg-num">7番</div>
+          <div class="mg-name">川染 洋</div>
+          <div class="mg-role">産業厚生委員長</div>
+          <div class="mg-tags"><span class="mg-tag">無所属</span><span class="mg-tag">当選6回</span></div>
+        </div>
+      </div>
+
+      <div class="mg-card">
+        <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3817/yamagutiyuuko.jpg" alt="山口優子" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+        <div class="mg-ph">👤</div>
+        <div class="mg-info">
+          <div class="mg-num">5番</div>
+          <div class="mg-name">山口 優子</div>
+          <div class="mg-role">総務文教委員長</div>
+          <div class="mg-tags"><span class="mg-tag">無所属</span><span class="mg-tag">当選3回</span></div>
+        </div>
+      </div>
+
+      <div class="mg-card">
+        <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3859/aototosikazu.jpg" alt="青砥敏一" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+        <div class="mg-ph">👤</div>
+        <div class="mg-info">
+          <div class="mg-num">4番</div>
+          <div class="mg-name">青砥 敏一</div>
+          <div class="mg-role">議運副委員長</div>
+          <div class="mg-tags"><span class="mg-tag">無所属</span><span class="mg-tag">当選1回</span></div>
+        </div>
+      </div>
+
+      <div class="mg-card">
+        <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3867/kanekotakanobu.jpg" alt="金子孝伸" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+        <div class="mg-ph">👤</div>
+        <div class="mg-info">
+          <div class="mg-num">3番</div>
+          <div class="mg-name">金子 孝伸</div>
+          <div class="mg-role">自衛隊特別副委員長</div>
+          <div class="mg-tags"><span class="mg-tag">無所属</span><span class="mg-tag">当選1回</span></div>
+        </div>
+      </div>
+
+      <div class="mg-card">
+        <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3838/kuroiatusi.jpg" alt="黒井敦志" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+        <div class="mg-ph">👤</div>
+        <div class="mg-info">
+          <div class="mg-num">2番</div>
+          <div class="mg-name">黒井 敦志</div>
+          <div class="mg-role">産業厚生副委員長</div>
+          <div class="mg-tags"><span class="mg-tag">無所属</span><span class="mg-tag">当選1回</span></div>
+        </div>
+      </div>
+
+      <div class="mg-card">
+        <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3834/sasakiyasuto.jpg" alt="佐々木康人" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+        <div class="mg-ph">👤</div>
+        <div class="mg-info">
+          <div class="mg-num">1番</div>
+          <div class="mg-name">佐々木 康人</div>
+          <div class="mg-role">総務文教副委員長</div>
+          <div class="mg-tags"><span class="mg-tag">無所属</span><span class="mg-tag">当選1回</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="contact-card">
+    <h3>お問い合わせ</h3>
+    <p>議会事務局</p>
+    <button class="con-btn">📞 0156-66-4039</button>
+  </div>
+</div>
+
+<!-- ══════════════ 一般質問 ══════════════ -->
+<div class="page" id="page-ippan">
+  <div class="breadcrumb"><a onclick="goHome()">ホーム</a><span>›</span><span>一般質問</span></div>
+  <div class="page-hero">
+    <h1>一般質問</h1>
+    <p>定例会において、議員が町の施策や行政課題を執行者に直接質問します。議員1人につき答弁を含め60分以内で行います。</p>
+  </div>
+
+  <div class="sec">
+    <div class="sec-hd" style="padding-top:0"><h2 class="sec-ttl">年度別一覧</h2></div>
+    <div class="year-list">
+      <div class="yr-item current">
+        <div class="yr-left"><div class="yr-badge">R8</div><div><div class="yr-label">令和8年</div><div class="yr-sub">2026年 — 最新</div></div></div>
+        <span class="yr-arr">›</span>
+      </div>
+      <div class="yr-item">
+        <div class="yr-left"><div class="yr-badge">R7</div><div><div class="yr-label">令和7年</div><div class="yr-sub">2025年</div></div></div>
+        <span class="yr-arr">›</span>
+      </div>
+      <div class="yr-item">
+        <div class="yr-left"><div class="yr-badge">R6</div><div><div class="yr-label">令和6年</div><div class="yr-sub">2024年</div></div></div>
+        <span class="yr-arr">›</span>
+      </div>
+      <div class="yr-item">
+        <div class="yr-left"><div class="yr-badge">R5</div><div><div class="yr-label">令和5年</div><div class="yr-sub">2023年</div></div></div>
+        <span class="yr-arr">›</span>
+      </div>
+      <div class="yr-item">
+        <div class="yr-left"><div class="yr-badge">R4</div><div><div class="yr-label">令和4年</div><div class="yr-sub">2022年</div></div></div>
+        <span class="yr-arr">›</span>
+      </div>
+      <div class="yr-item">
+        <div class="yr-left"><div class="yr-badge">R3</div><div><div class="yr-label">令和3年</div><div class="yr-sub">2021年</div></div></div>
+        <span class="yr-arr">›</span>
+      </div>
+      <div class="yr-item">
+        <div class="yr-left"><div class="yr-badge">R2</div><div><div class="yr-label">令和2年</div><div class="yr-sub">2020年</div></div></div>
+        <span class="yr-arr">›</span>
+      </div>
+      <div class="yr-item">
+        <div class="yr-left"><div class="yr-badge">R1</div><div><div class="yr-label">令和元年・平成31年</div><div class="yr-sub">2019年</div></div></div>
+        <span class="yr-arr">›</span>
+      </div>
+      <div class="yr-item">
+        <div class="yr-left"><div class="yr-badge">H30</div><div><div class="yr-label">平成30年</div><div class="yr-sub">2018年</div></div></div>
+        <span class="yr-arr">›</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-card">
+    <h3>お問い合わせ</h3>
+    <p>一般質問に関するご質問は議会事務局まで</p>
+    <button class="con-btn">📞 0156-66-4039</button>
+  </div>
+</div>
+
+<!-- ══════════════ お知らせ一覧 ══════════════ -->
+<div class="page" id="page-oshirase">
+  <div class="breadcrumb"><a onclick="goHome()">ホーム</a><span>›</span><span>お知らせ</span></div>
+  <div class="page-hero">
+    <h1>議会からのお知らせ</h1>
+    <p>イベント・会議・議会だよりなど最新情報をお届けします。</p>
+  </div>
+  <div class="sec">
+    <div class="sec-hd" style="padding-top:0"><h2 class="sec-ttl">最新のお知らせ</h2></div>
+    <div class="news-list">
+      <div class="nc" onclick="goto('news-detail')">
+        <div class="nc-meta"><div class="nc-date">2026年1月26日</div><div class="nc-ttl">しかおい議会だより第169号を掲載しました</div></div>
+        <span class="badge">新着</span>
+      </div>
+      <div class="nc" onclick="goto('news-detail')">
+        <div class="nc-meta"><div class="nc-date">2026年1月6日</div><div class="nc-ttl">2/24 議員と語り合う「カフェでひとこと」を平成館で開催します</div></div>
+        <span class="badge ev">イベント</span>
+      </div>
+      <div class="nc" onclick="goto('news-detail')">
+        <div class="nc-meta"><div class="nc-date">2025年10月24日</div><div class="nc-ttl">11/25 議員と語り合う「カフェでひとこと」を平成館で開催します</div></div>
+        <span class="badge ev">イベント</span>
+      </div>
+      <div class="nc" onclick="goto('news-detail')">
+        <div class="nc-meta"><div class="nc-date">2025年10月20日</div><div class="nc-ttl">しかおい議会だより第168号を掲載しました</div></div>
+        <span class="nc-arr">›</span>
+      </div>
+      <div class="nc" onclick="goto('news-detail')">
+        <div class="nc-meta"><div class="nc-date">2025年10月17日</div><div class="nc-ttl">10/22 議会報告会・広聴会を開催します</div></div>
+        <span class="badge ev">イベント</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ お知らせ詳細 ══════════════ -->
+<div class="page" id="page-news-detail">
+  <div class="breadcrumb"><a onclick="goHome()">ホーム</a><span>›</span><a onclick="goto('oshirase')">お知らせ</a><span>›</span><span>詳細</span></div>
+  <div style="padding:24px 20px 0">
+    <div style="font-size:12px;color:var(--text3);font-weight:500;margin-bottom:8px">2026年1月26日 ・ お知らせ</div>
+    <h1 style="font-family:'Noto Serif JP',serif;font-size:22px;font-weight:600;line-height:1.4;margin-bottom:20px">しかおい議会だより第169号を掲載しました</h1>
+  </div>
+  <div style="margin:0 20px 24px;background:var(--surface);border-radius:var(--r2);padding:20px;box-shadow:var(--sh1);border:1px solid var(--border)">
+    <p style="font-size:14px;line-height:1.9;color:var(--text2)">鹿追町議会だより第169号を掲載しました。<br><br>今号では令和7年12月定例会の審議内容、各委員会の活動報告、議員一般質問の要旨などを掲載しています。ぜひご覧ください。</p>
+    <div style="margin-top:16px;padding:14px 16px;background:var(--bg);border-radius:10px;display:flex;align-items:center;gap:12px">
+      <span style="font-size:24px">📄</span>
+      <div>
+        <div style="font-size:13px;font-weight:700">議会だより第169号</div>
+        <div style="font-size:11px;color:var(--text3)">PDF形式・○○KB</div>
+      </div>
+      <span style="margin-left:auto;font-size:18px;color:var(--text3)">↓</span>
+    </div>
+  </div>
+  <div style="padding:0 20px">
+    <div style="font-size:12px;color:var(--text3);margin-bottom:8px;font-weight:500">関連ページ</div>
+    <div class="toc-card">
+      <div class="toc-item" onclick="goto('oshirase')"><span class="toc-label">お知らせ一覧へ戻る</span><span class="toc-arr">›</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ プレースホルダーページ群 ══════════════ -->
+<div class="page" id="page-chukei">
+  <div class="breadcrumb"><a onclick="goHome()">ホーム</a><span>›</span><span>議会中継</span></div>
+  <div class="page-hero"><h1>議会中継</h1><p>本会議・委員会のライブ中継および録画映像をご覧いただけます。</p></div>
+  <div style="margin:20px;background:var(--surface);border-radius:var(--r2);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh1);border:1px solid var(--border);font-size:40px">📡</div>
+  <div class="info-block" style="margin:0 20px 20px"><h3>📅 次回放映予定</h3><p>令和8年第1回定例会<br>2026年3月2日（月）午前10時〜</p></div>
+</div>
+
+<div class="page" id="page-seigan">
+  <div class="breadcrumb"><a onclick="goHome()">ホーム</a><span>›</span><span>請願・陳情</span></div>
+  <div class="page-hero"><h1>請願・陳情</h1><p>町政などに関することを文書で請願・陳情することができます。</p></div>
+  <div class="info-block" style="margin:20px"><h3>📬 提出方法</h3><p>要旨をできるだけ簡潔に書いて提出してください。請願には紹介議員が必要です。陳情は紹介議員不要です。</p><button class="info-link-btn"><span>様式ダウンロード（PDF）</span><span style="color:var(--text3)">↓</span></button></div>
+</div>
+
+<div class="page" id="page-nittei">
+  <div class="breadcrumb"><a onclick="goHome()">ホーム</a><span>›</span><span>議事日程・議案</span></div>
+  <div class="page-hero"><h1>議事日程・議案</h1><p>定例会・臨時会の日程と提出議案を掲載しています。</p></div>
+  <div class="sec"><div class="sec-hd" style="padding-top:0"><h2 class="sec-ttl">令和8年</h2></div>
+  <div class="pdf-list">
+    <div class="pdf-item"><div class="pdf-icon">📄</div><div><div class="pdf-label">第1回定例会 議事日程</div><div class="pdf-size">PDF・○○KB</div></div><span style="color:var(--text3)">↓</span></div>
+  </div></div>
+</div>
+
+<div class="page" id="page-machinaka">
+  <div class="breadcrumb"><a onclick="goHome()">ホーム</a><span>›</span><span>まちなか会議</span></div>
+  <div class="page-hero"><h1>まちなか会議</h1><p>議員が地域に出向いて、町民の皆さんと直接対話する会議です。</p></div>
+  <div class="info-block" style="margin:20px"><h3>💬 次回開催予定</h3><p>2026年2月24日（火）<br>場所：平成館<br>テーマ：議員と語り合う「カフェでひとこと」</p></div>
+</div>
+
+<div class="page" id="page-gijiroku">
+  <div class="breadcrumb"><a onclick="goHome()">ホーム</a><span>›</span><span>会議録</span></div>
+  <div class="page-hero"><h1>会議録</h1><p>本会議・委員会の議事録を掲載しています。</p></div>
+  <div class="sec"><div class="sec-hd" style="padding-top:0"><h2 class="sec-ttl">令和8年</h2></div>
+  <div class="pdf-list">
+    <div class="pdf-item"><div class="pdf-icon">📄</div><div><div class="pdf-label">第1回定例会 会議録</div><div class="pdf-size">PDF・○○KB</div></div><span style="color:var(--text3)">↓</span></div>
+  </div></div>
+</div>
+
+<div class="page" id="page-calendar">
+  <div class="breadcrumb"><a onclick="goHome()">ホーム</a><span>›</span><span>議会カレンダー</span></div>
+  <div class="page-hero"><h1>議会カレンダー</h1><p>定例会・委員会の開催予定日をご確認いただけます。</p></div>
+  <div class="info-block" style="margin:20px"><h3>📅 令和8年 主な日程</h3>
+    <p>第1回定例会：3月2日〜3月26日<br>第2回定例会：6月（予定）<br>第3回定例会：9月（予定）<br>第4回定例会：12月（予定）</p>
+  </div>
+</div>
+
+<div class="page" id="page-gaiyou">
+  <div class="breadcrumb"><a onclick="goHome()">ホーム</a><span>›</span><a onclick="goto('about')">議会について</a><span>›</span><span>議会概要</span></div>
+  <div class="page-hero"><h1>鹿追町と議会の概要</h1><p>各年度の概要書をPDFでご覧いただけます。</p></div>
+  <div class="sec"><div class="sec-hd" style="padding-top:0"><h2 class="sec-ttl">年度別PDF</h2></div>
+  <div class="pdf-list">
+    <div class="pdf-item"><div class="pdf-icon">📄</div><div><div class="pdf-label">令和6年度（R7.1.1現在）</div><div class="pdf-size">PDF・989KB</div></div><span style="color:var(--text3)">↓</span></div>
+    <div class="pdf-item"><div class="pdf-icon">📄</div><div><div class="pdf-label">令和5年度</div><div class="pdf-size">PDF・924KB</div></div><span style="color:var(--text3)">↓</span></div>
+    <div class="pdf-item"><div class="pdf-icon">📄</div><div><div class="pdf-label">令和4年度</div><div class="pdf-size">PDF・836KB</div></div><span style="color:var(--text3)">↓</span></div>
+    <div class="pdf-item"><div class="pdf-icon">📄</div><div><div class="pdf-label">令和3年度</div><div class="pdf-size">PDF・1MB</div></div><span style="color:var(--text3)">↓</span></div>
+    <div class="pdf-item"><div class="pdf-icon">📄</div><div><div class="pdf-label">令和2年度</div><div class="pdf-size">PDF・2MB</div></div><span style="color:var(--text3)">↓</span></div>
+  </div></div>
+</div>
+
+<div class="page" id="page-contact">
+  <div class="breadcrumb"><a onclick="goHome()">ホーム</a><span>›</span><span>お問い合わせ</span></div>
+  <div class="page-hero"><h1>議会へのお問い合わせ</h1><p>ご質問・ご意見・傍聴のお申し込みなど、お気軽にご連絡ください。</p></div>
+  <div class="info-block" style="margin:20px">
+    <h3>📞 電話・FAX</h3>
+    <p>電話：0156-66-4039<br>FAX：0156-66-4041<br>受付時間：平日 8:30〜17:15</p>
+  </div>
+  <div class="info-block" style="margin:0 20px 20px">
+    <h3>🏢 所在地</h3>
+    <p>〒081-0292<br>北海道河東郡鹿追町東町1丁目15番地1<br>鹿追町役場内 議会事務局</p>
+  </div>
+</div>
+
+<!-- ── TAB BAR ── -->
+<div class="tabs">
+  <button class="ti active" id="tab-home" onclick="switchTab('home')"><span class="ti-icon">🏠</span><span class="ti-lbl">ホーム</span></button>
+  <button class="ti" id="tab-nittei" onclick="goto('nittei');switchTab('nittei')"><span class="ti-icon">📅</span><span class="ti-lbl">日程</span></button>
+  <button class="ti" id="tab-meibo" onclick="goto('meibo');switchTab('meibo')"><span class="ti-icon">👥</span><span class="ti-lbl">議員</span></button>
+  <button class="ti" id="tab-chukei" onclick="goto('chukei');switchTab('chukei')"><span class="ti-icon">📡</span><span class="ti-lbl">中継</span></button>
+  <button class="ti" id="tab-contact" onclick="goto('contact');switchTab('contact')"><span class="ti-icon">📬</span><span class="ti-lbl">連絡</span></button>
+</div>
+
+<script>
+let history = ['home'];
+
+function goto(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const target = document.getElementById('page-'+id);
+  if(target){
+    target.classList.add('active');
+    target.scrollTop = 0;
+    window.scrollTo(0,0);
+  }
+  if(id !== 'home') history.push(id);
+  else history = ['home'];
+  updateNav(id);
+}
+
+function goBack(){
+  history.pop();
+  const prev = history[history.length-1] || 'home';
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const target = document.getElementById('page-'+prev);
+  if(target){ target.classList.add('active'); window.scrollTo(0,0); }
+  updateNav(prev);
+}
+
+function goHome(){
+  goto('home');
+  switchTab('home');
+}
+
+function updateNav(id){
+  const backBtn = document.getElementById('nav-back');
+  if(id==='home'){ backBtn.style.display='none'; }
+  else { backBtn.style.display='flex'; }
+}
+
+function switchTab(id){
+  document.querySelectorAll('.ti').forEach(t=>t.classList.remove('active'));
+  const tab = document.getElementById('tab-'+id);
+  if(tab) tab.classList.add('active');
+}
+
+// image fallback
+document.querySelectorAll('img').forEach(img=>{
+  img.addEventListener('error',function(){
+    this.style.display='none';
+    const ph=this.nextElementSibling;
+    if(ph&&ph.classList.contains('mc-ph')||ph&&ph.classList.contains('mg-ph'))ph.style.display='flex';
+  });
+});
+</script>
+</body>
+</html>
