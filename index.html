@@ -174,8 +174,61 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
   .member-grid{grid-template-columns:repeat(3,1fr)}
 }
 </style>
+<style>
+/* ── PASSWORD SCREEN ── */
+#pw-screen{
+  position:fixed;inset:0;z-index:9999;
+  background:#f5f5f7;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Noto Sans JP',-apple-system,sans-serif;
+}
+.pw-card{
+  background:#fff;border-radius:24px;padding:40px 32px;
+  box-shadow:0 8px 40px rgba(0,0,0,.12);
+  width:calc(100% - 40px);max-width:360px;text-align:center;
+}
+.pw-mark{
+  width:56px;height:56px;background:#1d1d1f;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:22px;font-weight:700;margin:0 auto 20px;
+}
+.pw-title{font-size:20px;font-weight:700;margin-bottom:6px;letter-spacing:-.3px}
+.pw-sub{font-size:14px;color:#6e6e73;margin-bottom:28px;line-height:1.6}
+.pw-input{
+  width:100%;padding:14px 16px;border:1.5px solid rgba(0,0,0,.12);
+  border-radius:12px;font-size:16px;font-family:inherit;
+  outline:none;transition:border .2s;text-align:center;letter-spacing:2px;
+  margin-bottom:12px;
+}
+.pw-input:focus{border-color:#0071e3;}
+.pw-btn{
+  width:100%;padding:14px;background:#0071e3;color:#fff;border:none;
+  border-radius:12px;font-size:16px;font-weight:600;font-family:inherit;
+  cursor:pointer;transition:opacity .15s;
+}
+.pw-btn:hover{opacity:.88}
+.pw-error{color:#e2433c;font-size:13px;margin-top:10px;display:none}
+.pw-note{font-size:11px;color:#aeaeb2;margin-top:20px;line-height:1.6}
+</style>
 </head>
 <body>
+
+<!-- パスワード画面 -->
+<div id="pw-screen">
+  <div class="pw-card">
+    <div class="pw-mark">鹿</div>
+    <div class="pw-title">鹿追町議会</div>
+    <div class="pw-sub">プレビューサイトです。<br>パスワードを入力してください。</div>
+    <input class="pw-input" type="password" id="pw-input" placeholder="パスワード" onkeydown="if(event.key==='Enter')checkPw()">
+    <button class="pw-btn" onclick="checkPw()">入る</button>
+    <div class="pw-error" id="pw-error">パスワードが違います</div>
+    <div class="pw-note">このサイトは内部確認用です。<br>外部への公開はご遠慮ください。</div>
+  </div>
+</div>
+
+<!-- サイト本体（認証後に表示） -->
+<div id="site" style="display:none">
+
 
 <!-- NAV -->
 <nav class="nav">
@@ -716,6 +769,32 @@ document.querySelectorAll('img').forEach(img=>{
     if(ph&&ph.classList.contains('mc-ph')||ph&&ph.classList.contains('mg-ph'))ph.style.display='flex';
   });
 });
+</script>
+
+</div>
+
+<script>
+function checkPw(){
+  const input = document.getElementById('pw-input').value;
+  const correct = 'shikaoi2026';
+  if(input === correct){
+    document.getElementById('pw-screen').style.display='none';
+    document.getElementById('site').style.display='block';
+    sessionStorage.setItem('gikai-auth','ok');
+  } else {
+    document.getElementById('pw-error').style.display='block';
+    document.getElementById('pw-input').value='';
+    document.getElementById('pw-input').focus();
+  }
+}
+
+// セッション中は再入力不要
+if(sessionStorage.getItem('gikai-auth')==='ok'){
+  document.getElementById('pw-screen').style.display='none';
+  document.getElementById('site').style.display='block';
+}
+
+window.onload=()=>document.getElementById('pw-input').focus();
 </script>
 </body>
 </html>
