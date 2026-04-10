@@ -641,9 +641,86 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
 <!-- ══════════════ プレースホルダーページ群 ══════════════ -->
 <div class="page" id="page-chukei">
   <div class="breadcrumb"><a onclick="goHome()">ホーム</a><span>›</span><span>議会中継</span></div>
-  <div class="page-hero"><h1>議会中継</h1><p>本会議・委員会のライブ中継および録画映像をご覧いただけます。</p></div>
-  <div style="margin:20px;background:var(--surface);border-radius:var(--r2);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh1);border:1px solid var(--border);font-size:40px">📡</div>
-  <div class="info-block" style="margin:0 20px 20px"><h3>📅 次回放映予定</h3><p>令和8年第1回定例会<br>2026年3月2日（月）午前10時〜</p></div>
+  <div class="page-hero">
+    <h1>議会中継</h1>
+    <p>本会議・委員会のライブ中継および過去の録画映像をご覧いただけます。</p>
+  </div>
+
+  <!-- ライブ・最新動画 -->
+  <div class="sec">
+    <div class="sec-hd" style="padding-top:0"><h2 class="sec-ttl">最新・ライブ中継</h2></div>
+    <div style="background:var(--surface);border-radius:var(--r2);overflow:hidden;box-shadow:var(--sh1);border:1px solid var(--border)">
+      <div style="position:relative;padding-top:56.25%">
+        <iframe
+          id="yt-live"
+          style="position:absolute;top:0;left:0;width:100%;height:100%;border:none"
+          src="https://www.youtube.com/embed?listType=user_uploads&list=@北海道鹿追町議会&index=1"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+      </div>
+      <div style="padding:14px 16px">
+        <div style="font-size:12px;color:var(--text3);margin-bottom:4px">最新の配信・アーカイブ</div>
+        <div style="font-size:14px;font-weight:600">鹿追町議会 YouTubeチャンネル</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 次回予定 -->
+  <div class="info-block" style="margin:0 20px 20px">
+    <h3>📅 次回放映予定</h3>
+    <p>令和8年第1回定例会<br>2026年3月2日（月）午前10時〜<br><br>定例会・委員会はYouTubeにてライブ配信します。通知を受け取るにはチャンネル登録をしてください。</p>
+    <a href="https://www.youtube.com/@北海道鹿追町議会/streams"
+       target="_blank"
+       style="display:flex;align-items:center;justify-content:space-between;background:#ff0000;border-radius:10px;padding:12px 16px;margin-top:12px;text-decoration:none">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:22px">▶️</span>
+        <span style="font-size:13px;font-weight:700;color:#fff">YouTubeチャンネルを見る</span>
+      </div>
+      <span style="color:rgba(255,255,255,.8);font-size:16px">›</span>
+    </a>
+  </div>
+
+  <!-- 過去アーカイブ -->
+  <div class="sec">
+    <div class="sec-hd"><h2 class="sec-ttl">過去の中継アーカイブ</h2></div>
+    <div class="news-list">
+      <a class="nc" href="https://www.youtube.com/@北海道鹿追町議会/streams" target="_blank">
+        <div class="nc-meta">
+          <div class="nc-date">令和8年 第1回定例会</div>
+          <div class="nc-ttl">本会議・一般質問 録画映像</div>
+        </div>
+        <span style="font-size:18px">▶️</span>
+      </a>
+      <a class="nc" href="https://www.youtube.com/@北海道鹿追町議会/streams" target="_blank">
+        <div class="nc-meta">
+          <div class="nc-date">令和7年 第4回定例会</div>
+          <div class="nc-ttl">本会議・一般質問 録画映像</div>
+        </div>
+        <span style="font-size:18px">▶️</span>
+      </a>
+      <a class="nc" href="https://www.youtube.com/@北海道鹿追町議会/streams" target="_blank">
+        <div class="nc-meta">
+          <div class="nc-date">令和7年 第3回定例会</div>
+          <div class="nc-ttl">本会議・一般質問 録画映像</div>
+        </div>
+        <span style="font-size:18px">▶️</span>
+      </a>
+      <a class="nc" href="https://www.youtube.com/@北海道鹿追町議会/streams" target="_blank">
+        <div class="nc-meta">
+          <div class="nc-date">過去の全アーカイブ</div>
+          <div class="nc-ttl">YouTubeチャンネルで全て見る</div>
+        </div>
+        <span style="color:var(--accent);font-size:14px;font-weight:600">YouTube ›</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="contact-card">
+    <h3>中継に関するお問い合わせ</h3>
+    <p>議会事務局</p>
+    <button class="con-btn">📞 0156-66-4039</button>
+  </div>
 </div>
 
 <div class="page" id="page-seigan">
