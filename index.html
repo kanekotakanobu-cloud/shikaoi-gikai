@@ -943,5 +943,63 @@ window.checkPw = function() {
 };
 </script>
 
+
+<script>
+// ── 中継アーカイブ連携 ──
+const ARCHIVE_API = 'https://script.google.com/macros/s/AKfycbwLILtgH3v-JzAwtXjZNFC6HQvYRJitLudE7LoHFW9uMvOQifEl82LpA4ogjSbTTGStSQ/exec';
+
+function loadArchive() {
+  const el = document.getElementById('archive-list');
+  if (!el) return;
+
+  fetch(ARCHIVE_API)
+    .then(r => r.json())
+    .then(data => {
+      if (!data || data.length === 0) {
+        el.innerHTML = '<div class="nc" style="padding:20px;color:#aeaeb2;text-align:center">アーカイブはありません</div>';
+        return;
+      }
+
+      el.innerHTML = data.map(item => `
+        <a class="nc" href="${item.url}" target="_blank">
+          <div class="nc-meta">
+            <div class="nc-date">${formatDateJP2(item.date)}</div>
+            <div class="nc-ttl">${item.title}</div>
+          </div>
+          <span style="font-size:18px">▶️</span>
+        </a>
+      `).join('') + `
+        <a class="nc" href="https://www.youtube.com/@北海道鹿追町議会/streams" target="_blank">
+          <div class="nc-meta">
+            <div class="nc-date">過去の全アーカイブ</div>
+            <div class="nc-ttl">YouTubeチャンネルで全て見る</div>
+          </div>
+          <span style="color:var(--accent);font-size:14px;font-weight:600">YouTube ›</span>
+        </a>
+      `;
+    })
+    .catch(err => {
+      console.log('アーカイブAPI読み込みエラー:', err);
+      el.innerHTML = '<a class="nc" href="https://www.youtube.com/@北海道鹿追町議会/streams" target="_blank"><div class="nc-meta"><div class="nc-ttl">YouTubeチャンネルで見る</div></div><span>▶️</span></a>';
+    });
+}
+
+function formatDateJP2(d) {
+  if (!d) return '';
+  const parts = d.split('/');
+  if (parts.length < 3) return d;
+  return `${parts[0]}年${parseInt(parts[1])}月${parseInt(parts[2])}日`;
+}
+
+// 中継ページを開いた時にアーカイブを読み込む
+const origGoto = window.goto;
+window.goto = function(id) {
+  origGoto(id);
+  if (id === 'chukei') {
+    loadArchive();
+  }
+};
+</script>
+
 </body>
 </html>
