@@ -1274,14 +1274,17 @@ function loadNews() {
             ? '<span class="badge ev">イベント</span>'
             : '<span class="nc-arr">›</span>';
           
+          const tag = item.url ? 'a' : 'div';
+          const linkAttr = item.url ? `href="${item.url}" target="_blank"` : '';
+          
           return `
-            <div class="nc" onclick="goto('news-detail')">
+            <${tag} class="nc" ${linkAttr}>
               <div class="nc-meta">
                 <div class="nc-date">${formatDateJP(item.date)}</div>
                 <div class="nc-ttl">${item.title}</div>
               </div>
               ${badgeHtml}
-            </div>`;
+            </${tag}>`;
         }).join('');
       });
     })
