@@ -797,28 +797,65 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
 
   <div class="sec">
     <div class="sec-hd" style="padding-top:0"><h2 class="sec-ttl">最新号</h2></div>
-    <div style="background:var(--surface);border-radius:var(--r2);padding:20px;box-shadow:var(--sh1);border:1px solid var(--border);display:flex;gap:16px;align-items:center">
-      <div style="width:60px;height:80px;background:linear-gradient(135deg,#e8f0fd,#c5d8f8);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0">📰</div>
+    <a href="https://www.town.shikaoi.lg.jp/file/contents/3537/32503/169gou.pdf" target="_blank"
+       style="background:var(--surface);border-radius:var(--r2);padding:20px;box-shadow:var(--sh1);border:1px solid var(--border);display:flex;gap:16px;align-items:center;text-decoration:none;color:inherit">
+      <img src="https://www.town.shikaoi.lg.jp/image/contents/3537/32507/thumb_2_169hyous.jpg"
+           style="width:60px;height:80px;object-fit:cover;border-radius:8px;flex-shrink:0;background:var(--bg)"
+           alt="第169号表紙"
+           onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+      <div style="width:60px;height:80px;background:linear-gradient(135deg,#e8f0fd,#c5d8f8);border-radius:8px;display:none;align-items:center;justify-content:center;font-size:28px;flex-shrink:0">📰</div>
       <div style="flex:1">
         <div style="font-size:12px;color:var(--text3);margin-bottom:4px">2026年1月25日発行</div>
         <div style="font-size:16px;font-weight:700;margin-bottom:4px">第169号</div>
         <div style="font-size:12px;color:var(--text2)">令和7年12月定例会の内容を掲載</div>
       </div>
-      <div style="color:var(--accent);font-size:24px">↓</div>
-    </div>
+      <div style="color:var(--accent);font-size:20px;font-weight:600">PDF ↓</div>
+    </a>
   </div>
 
   <div class="sec">
     <div class="sec-hd"><h2 class="sec-ttl">バックナンバー</h2></div>
-    <div class="year-list">
-      <div class="yr-item current"><div class="yr-left"><div class="yr-badge">R8</div><div><div class="yr-label">令和8年</div><div class="yr-sub">第169号〜</div></div></div><span class="yr-arr">›</span></div>
-      <div class="yr-item"><div class="yr-left"><div class="yr-badge">R7</div><div><div class="yr-label">令和7年</div><div class="yr-sub">第165号〜第168号</div></div></div><span class="yr-arr">›</span></div>
-      <div class="yr-item"><div class="yr-left"><div class="yr-badge">R6</div><div><div class="yr-label">令和6年</div><div class="yr-sub">第161号〜第164号</div></div></div><span class="yr-arr">›</span></div>
-      <div class="yr-item"><div class="yr-left"><div class="yr-badge">R5</div><div><div class="yr-label">令和5年</div><div class="yr-sub">第157号〜第160号</div></div></div><span class="yr-arr">›</span></div>
-      <div class="yr-item"><div class="yr-left"><div class="yr-badge">R4</div><div><div class="yr-label">令和4年</div><div class="yr-sub">第153号〜第156号</div></div></div><span class="yr-arr">›</span></div>
-      <div class="yr-item"><div class="yr-left"><div class="yr-badge">R3</div><div><div class="yr-label">令和3年</div><div class="yr-sub">第149号〜第152号</div></div></div><span class="yr-arr">›</span></div>
-      <div class="yr-item"><div class="yr-left"><div class="yr-badge">R2</div><div><div class="yr-label">令和2年</div><div class="yr-sub">第145号〜第148号</div></div></div><span class="yr-arr">›</span></div>
-      <div class="yr-item"><div class="yr-left"><div class="yr-badge" style="font-size:9px">H31</div><div><div class="yr-label">令和元年・平成31年</div><div class="yr-sub">第141号〜第144号</div></div></div><span class="yr-arr">›</span></div>
+    <div class="pdf-list">
+      <a class="pdf-item" href="https://www.town.shikaoi.lg.jp/gikai/news/2026y/" target="_blank">
+        <div class="pdf-icon">📰</div>
+        <div><div class="pdf-label">令和8年 議会だより一覧</div><div class="pdf-size">第169号〜</div></div>
+        <span style="color:var(--text3)">›</span>
+      </a>
+      <a class="pdf-item" href="https://www.town.shikaoi.lg.jp/gikai/news/2025y/" target="_blank">
+        <div class="pdf-icon">📰</div>
+        <div><div class="pdf-label">令和7年 議会だより一覧</div><div class="pdf-size">第165号〜第168号</div></div>
+        <span style="color:var(--text3)">›</span>
+      </a>
+      <a class="pdf-item" href="https://www.town.shikaoi.lg.jp/gikai/news/2024y/" target="_blank">
+        <div class="pdf-icon">📰</div>
+        <div><div class="pdf-label">令和6年 議会だより一覧</div><div class="pdf-size">第161号〜第164号</div></div>
+        <span style="color:var(--text3)">›</span>
+      </a>
+      <a class="pdf-item" href="https://www.town.shikaoi.lg.jp/gikai/news/2023y/" target="_blank">
+        <div class="pdf-icon">📰</div>
+        <div><div class="pdf-label">令和5年 議会だより一覧</div><div class="pdf-size">第157号〜第160号</div></div>
+        <span style="color:var(--text3)">›</span>
+      </a>
+      <a class="pdf-item" href="https://www.town.shikaoi.lg.jp/gikai/news/2022y/" target="_blank">
+        <div class="pdf-icon">📰</div>
+        <div><div class="pdf-label">令和4年 議会だより一覧</div><div class="pdf-size">第153号〜第156号</div></div>
+        <span style="color:var(--text3)">›</span>
+      </a>
+      <a class="pdf-item" href="https://www.town.shikaoi.lg.jp/gikai/news/2021y/" target="_blank">
+        <div class="pdf-icon">📰</div>
+        <div><div class="pdf-label">令和3年 議会だより一覧</div><div class="pdf-size">第149号〜第152号</div></div>
+        <span style="color:var(--text3)">›</span>
+      </a>
+      <a class="pdf-item" href="https://www.town.shikaoi.lg.jp/gikai/news/2020y/" target="_blank">
+        <div class="pdf-icon">📰</div>
+        <div><div class="pdf-label">令和2年 議会だより一覧</div><div class="pdf-size">第145号〜第148号</div></div>
+        <span style="color:var(--text3)">›</span>
+      </a>
+      <a class="pdf-item" href="https://www.town.shikaoi.lg.jp/gikai/news/2019y/" target="_blank">
+        <div class="pdf-icon">📰</div>
+        <div><div class="pdf-label">令和元年・平成31年 一覧</div><div class="pdf-size">第141号〜第144号</div></div>
+        <span style="color:var(--text3)">›</span>
+      </a>
     </div>
   </div>
 
