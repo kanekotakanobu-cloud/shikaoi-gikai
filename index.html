@@ -812,11 +812,38 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
 
 <div class="page" id="page-contact">
   <div class="breadcrumb"><a onclick="goHome()">ホーム</a><span>›</span><span>お問い合わせ</span></div>
-  <div class="page-hero"><h1>議会へのお問い合わせ</h1><p>ご質問・ご意見・傍聴のお申し込みなど、お気軽にご連絡ください。</p></div>
-  <div class="info-block" style="margin:20px">
+  <div class="page-hero">
+    <h1>議会へのお問い合わせ</h1>
+    <p>ご質問・ご意見・傍聴のお申し込みなど、お気軽にご連絡ください。</p>
+  </div>
+
+  <!-- Googleフォーム埋め込み -->
+  <div style="margin:0 20px 20px">
+    <div style="background:var(--surface);border-radius:var(--r2);overflow:hidden;box-shadow:var(--sh1);border:1px solid var(--border)">
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSdpBbY0r2kR3c8ZQj9v6DbXSjJhtv5CqS58/viewform?embedded=true"
+        width="100%"
+        height="800"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        style="display:block">
+        読み込んでいます…
+      </iframe>
+    </div>
+    <!-- フォームが表示されない場合のリンク -->
+    <a href="https://forms.gle/v6DbXSjJhtv5CqS58"
+       target="_blank"
+       style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;padding:14px;background:var(--accent);color:#fff;border-radius:var(--r2);text-decoration:none;font-size:14px;font-weight:600">
+      📝 フォームが表示されない場合はこちら
+    </a>
+  </div>
+
+  <div class="info-block" style="margin:0 20px 20px">
     <h3>📞 電話・FAX</h3>
     <p>電話：0156-66-4039<br>FAX：0156-66-4041<br>受付時間：平日 8:30〜17:15</p>
   </div>
+
   <div class="info-block" style="margin:0 20px 20px">
     <h3>🏢 所在地</h3>
     <p>〒081-0292<br>北海道河東郡鹿追町東町1丁目15番地1<br>鹿追町役場内 議会事務局</p>
