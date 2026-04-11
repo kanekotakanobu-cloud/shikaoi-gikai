@@ -273,10 +273,13 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
       <button class="qc" onclick="goto('ippan')"><div class="qi io">🎤</div><span class="ql">一般質問</span></button>
       <button class="qc" onclick="goto('calendar')"><div class="qi ip">📅</div><span class="ql">カレンダー</span></button>
       <button class="qc" onclick="goto('chukei')"><div class="qi it">📡</div><span class="ql">議会中継</span></button>
+      <button class="qc" onclick="goto('dayori')"><div class="qi iy">📰</div><span class="ql">議会だより</span></button>
       <button class="qc" onclick="goto('seigan')"><div class="qi ir">📬</div><span class="ql">請願・陳情</span></button>
       <button class="qc" onclick="goto('nittei')"><div class="qi igr">📝</div><span class="ql">議事日程</span></button>
-      <button class="qc" onclick="goto('machinaka')"><div class="qi iy">💬</div><span class="ql">まちなか会議</span></button>
-      <button class="qc" onclick="goto('gijiroku')"><div class="qi ipk">🔍</div><span class="ql">会議録</span></button>
+      <button class="qc" onclick="goto('machinaka')"><div class="qi ipk">💬</div><span class="ql">まちなか会議</span></button>
+      <button class="qc" onclick="goto('gijiroku')"><div class="qi igr">🔍</div><span class="ql">会議録</span></button>
+      <button class="qc" onclick="goto('iinkai')"><div class="qi ig">🏛</div><span class="ql">委員会</span></button>
+      <button class="qc" onclick="goto('seimu')"><div class="qi io">💴</div><span class="ql">政務活動費</span></button>
     </div>
   </div>
 
@@ -299,7 +302,7 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
   </div>
 
   <div class="sec">
-    <div class="sec-hd"><h2 class="sec-ttl">議員名簿</h2><button class="sec-more" onclick="goto('meibo')">全員を見る</button></div>
+    <div class="sec-hd"><h2 class="sec-ttl">議員名簿</h2><button class="sec-more" onclick="goto('meibo')">詳細を見る</button></div>
     <div class="mem-scroll">
       <div class="mc" onclick="goto('meibo')">
         <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3841/uesimakazusi.jpg" alt="上嶋和志" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
@@ -312,19 +315,52 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
         <div class="mc-info"><div class="mc-num">10番</div><div class="mc-name">清水 浩徳</div><div class="mc-role">副議長</div></div>
       </div>
       <div class="mc" onclick="goto('meibo')">
-        <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3867/kanekotakanobu.jpg" alt="金子孝伸" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
-        <div class="mc-ph">👤</div>
-        <div class="mc-info"><div class="mc-num">3番</div><div class="mc-name">金子 孝伸</div><div class="mc-role">総務文教委員</div></div>
-      </div>
-      <div class="mc" onclick="goto('meibo')">
         <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3862/andoumikio.jpg" alt="安藤幹夫" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
         <div class="mc-ph">👤</div>
         <div class="mc-info"><div class="mc-num">9番</div><div class="mc-name">安藤 幹夫</div><div class="mc-role">議運委員長</div></div>
       </div>
       <div class="mc" onclick="goto('meibo')">
+        <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3852/karinomasao.jpg" alt="狩野正雄" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+        <div class="mc-ph">👤</div>
+        <div class="mc-info"><div class="mc-num">8番</div><div class="mc-name">狩野 正雄</div><div class="mc-role">広報委員長</div></div>
+      </div>
+      <div class="mc" onclick="goto('meibo')">
+        <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3848/kawaseomehirosi.jpg" alt="川染洋" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+        <div class="mc-ph">👤</div>
+        <div class="mc-info"><div class="mc-num">7番</div><div class="mc-name">川染 洋</div><div class="mc-role">産業厚生委員長</div></div>
+      </div>
+      <div class="mc" onclick="goto('meibo')">
         <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3817/yamagutiyuuko.jpg" alt="山口優子" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
         <div class="mc-ph">👤</div>
         <div class="mc-info"><div class="mc-num">5番</div><div class="mc-name">山口 優子</div><div class="mc-role">総務文教委員長</div></div>
+      </div>
+      <div class="mc" onclick="goto('meibo')">
+        <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3859/aototosikazu.jpg" alt="青砥敏一" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+        <div class="mc-ph">👤</div>
+        <div class="mc-info"><div class="mc-num">4番</div><div class="mc-name">青砥 敏一</div><div class="mc-role">議運副委員長</div></div>
+      </div>
+      <div class="mc" onclick="goto('meibo')">
+        <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3867/kanekotakanobu.jpg" alt="金子孝伸" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+        <div class="mc-ph">👤</div>
+        <div class="mc-info"><div class="mc-num">3番</div><div class="mc-name">金子 孝伸</div><div class="mc-role">自衛隊特別副委員長</div></div>
+      </div>
+      <div class="mc" onclick="goto('meibo')">
+        <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3838/kuroiatusi.jpg" alt="黒井敦志" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+        <div class="mc-ph">👤</div>
+        <div class="mc-info"><div class="mc-num">2番</div><div class="mc-name">黒井 敦志</div><div class="mc-role">産業厚生副委員長</div></div>
+      </div>
+      <div class="mc" onclick="goto('meibo')">
+        <img src="https://www.town.shikaoi.lg.jp/image/contents/492/3834/sasakiyasuto.jpg" alt="佐々木康人" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+        <div class="mc-ph">👤</div>
+        <div class="mc-info"><div class="mc-num">1番</div><div class="mc-name">佐々木 康人</div><div class="mc-role">総務文教副委員長</div></div>
+      </div>
+      <!-- 全員を見るカード -->
+      <div class="mc" onclick="goto('meibo')" style="background:var(--accent);border-color:var(--accent);justify-content:center">
+        <div style="aspect-ratio:1;width:100%;display:flex;align-items:center;justify-content:center;font-size:32px;background:rgba(255,255,255,.15)">👥</div>
+        <div class="mc-info" style="text-align:center;padding:14px 8px">
+          <div style="font-size:13px;font-weight:700;color:#fff;line-height:1.4">全員の<br>詳細を見る</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.8);margin-top:4px">→</div>
+        </div>
       </div>
     </div>
   </div>
