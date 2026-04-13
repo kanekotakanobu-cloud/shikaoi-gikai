@@ -663,13 +663,15 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
     </div>
   </div>
 
-  <!-- 次回予定 -->
+  <!-- 次回予定（スプレッドシート連携） -->
   <div class="info-block" style="margin:0 20px 20px">
     <h3>📅 次回放映予定</h3>
-    <p>令和8年第1回定例会<br>2026年3月2日（月）午前10時〜<br><br>定例会・委員会はYouTubeにてライブ配信します。通知を受け取るにはチャンネル登録をしてください。</p>
+    <div id="schedule-list">
+      <p style="color:#aeaeb2;font-size:13px">読み込み中...</p>
+    </div>
     <a href="https://www.youtube.com/@北海道鹿追町議会/streams"
        target="_blank"
-       style="display:flex;align-items:center;justify-content:space-between;background:#ff0000;border-radius:10px;padding:12px 16px;margin-top:12px;text-decoration:none">
+       style="display:flex;align-items:center;justify-content:space-between;background:#ff0000;border-radius:10px;padding:12px 16px;margin-top:16px;text-decoration:none">
       <div style="display:flex;align-items:center;gap:10px">
         <span style="font-size:22px">▶️</span>
         <span style="font-size:13px;font-weight:700;color:#fff">YouTubeチャンネルを見る</span>
@@ -1333,6 +1335,47 @@ const origGoto = window.goto;
 window.goto = function(id) {
   origGoto(id);
   if (id === 'chukei') {
+    loadArchive();
+  }
+};
+</script>
+
+
+<script>
+// ── 次回放映予定連携 ──
+const SCHEDULE_API = 'https://script.google.com/a/macros/takahaus.net/s/AKfycbyx32qNZ-14O3r7AN2uIO86pNxcJxdtiV6enEzxXQSiiHWd-8Q5O4DkNp8vAFGq6w3z/exec';
+
+function loadSchedule() {
+  const el = document.getElementById('schedule-list');
+  if (!el) return;
+
+  fetch(SCHEDULE_API)
+    .then(r => r.json())
+    .then(data => {
+      if (!data || data.length === 0) {
+        el.innerHTML = '<p style="color:#aeaeb2;font-size:13px">現在予定はありません</p>';
+        return;
+      }
+      el.innerHTML = data.map(item => `
+        <div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border)">
+          <div style="font-size:14px;font-weight:700;margin-bottom:4px">${item.title}</div>
+          <div style="font-size:13px;color:var(--text2)">${item.datetime}</div>
+          <div style="font-size:12px;color:var(--text3);margin-top:2px">${item.place}</div>
+        </div>
+      `).join('') ;
+    })
+    .catch(err => {
+      console.log('スケジュールAPI読み込みエラー:', err);
+      el.innerHTML = '<p style="color:#aeaeb2;font-size:13px">現在予定はありません</p>';
+    });
+}
+
+// 中継ページを開いた時に読み込む
+const _origGoto = window.goto;
+window.goto = function(id) {
+  _origGoto(id);
+  if (id === 'chukei') {
+    loadSchedule();
     loadArchive();
   }
 };
