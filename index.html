@@ -1330,14 +1330,7 @@ function formatDateJP2(d) {
   return `${parts[0]}年${parseInt(parts[1])}月${parseInt(parts[2])}日`;
 }
 
-// 中継ページを開いた時にアーカイブを読み込む
-const origGoto = window.goto;
-window.goto = function(id) {
-  origGoto(id);
-  if (id === 'chukei') {
-    loadArchive();
-  }
-};
+// loadArchive は別のgoto上書きで呼び出し済み
 </script>
 
 
@@ -1375,8 +1368,10 @@ const _origGoto = window.goto;
 window.goto = function(id) {
   _origGoto(id);
   if (id === 'chukei') {
-    loadSchedule();
-    loadArchive();
+    setTimeout(() => {
+      loadSchedule();
+      loadArchive();
+    }, 100);
   }
 };
 </script>
