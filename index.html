@@ -268,16 +268,11 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
     <div class="quick-grid">
       <button class="qc" onclick="goto('oshirase')"><div class="qi ib">📋</div><span class="ql">お知らせ</span></button>
       <button class="qc" onclick="goto('about')"><div class="qi ig">🏛️</div><span class="ql">議会について</span></button>
-      <button class="qc" onclick="goto('ippan')"><div class="qi io">🎤</div><span class="ql">一般質問</span></button>
       <button class="qc" onclick="goto('calendar')"><div class="qi ip">📅</div><span class="ql">カレンダー</span></button>
-      <button class="qc" onclick="goto('chukei')"><div class="qi it">📡</div><span class="ql">議会中継</span></button>
-      <button class="qc" onclick="goto('dayori')"><div class="qi iy">📰</div><span class="ql">議会だより</span></button>
       <button class="qc" onclick="goto('seigan')"><div class="qi ir">📬</div><span class="ql">請願・陳情</span></button>
-      <button class="qc" onclick="goto('nittei')"><div class="qi igr">📝</div><span class="ql">議事日程</span></button>
       <button class="qc" onclick="goto('machinaka')"><div class="qi ipk">💬</div><span class="ql">まちなか会議</span></button>
-      <button class="qc" onclick="goto('gijiroku')"><div class="qi igr">🔍</div><span class="ql">会議録</span></button>
-      <button class="qc" onclick="goto('iinkai')"><div class="qi ig">🏛</div><span class="ql">委員会</span></button>
-      <button class="qc" onclick="goto('seimu')"><div class="qi io">💴</div><span class="ql">政務活動費</span></button>
+      <button class="qc" onclick="goto('dayori')"><div class="qi iy">📰</div><span class="ql">議会だより</span></button>
+      <button class="qc" onclick="goto('sitemap')" style="background:var(--bg)"><div class="qi igr">🗂️</div><span class="ql">すべて見る</span></button>
     </div>
   </div>
 
@@ -1095,6 +1090,65 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
     <h3>お問い合わせ</h3>
     <p>議会事務局</p>
     <button class="con-btn">📞 0156-66-4039</button>
+  </div>
+</div>
+
+<!-- ══════════════ サイトマップ ══════════════ -->
+<div class="page" id="page-sitemap">
+  <div class="breadcrumb"><a onclick="goHome()">ホーム</a><span>›</span><span>すべてのページ</span></div>
+  <div class="page-hero">
+    <h1>すべてのページ</h1>
+    <p>鹿追町議会サイトの全ページ一覧です。</p>
+  </div>
+
+  <div class="sec">
+    <div class="sec-hd" style="padding-top:0"><h2 class="sec-ttl">議会について</h2></div>
+    <div class="toc-card">
+      <div class="toc-item" onclick="goto('about')"><span class="toc-label">🏛️ 鹿追町議会について</span><span class="toc-arr">›</span></div>
+      <div class="toc-item" onclick="goto('meibo')"><span class="toc-label">👥 議員名簿</span><span class="toc-arr">›</span></div>
+      <div class="toc-item" onclick="goto('iinkai')"><span class="toc-label">📋 委員会</span><span class="toc-arr">›</span></div>
+      <div class="toc-item" onclick="goto('honkaigi')"><span class="toc-label">🏛 本会議等について</span><span class="toc-arr">›</span></div>
+      <div class="toc-item" onclick="goto('kaikaku')"><span class="toc-label">🔄 議会改革</span><span class="toc-arr">›</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-hd"><h2 class="sec-ttl">会議・審議</h2></div>
+    <div class="toc-card">
+      <div class="toc-item" onclick="goto('nittei')"><span class="toc-label">📝 議事日程・議案</span><span class="toc-arr">›</span></div>
+      <div class="toc-item" onclick="goto('ippan')"><span class="toc-label">🎤 一般質問</span><span class="toc-arr">›</span></div>
+      <div class="toc-item" onclick="goto('giketsu')"><span class="toc-label">📜 議決結果</span><span class="toc-arr">›</span></div>
+      <div class="toc-item" onclick="goto('ikensho')"><span class="toc-label">📄 意見書・決議</span><span class="toc-arr">›</span></div>
+      <div class="toc-item" onclick="goto('seigan')"><span class="toc-label">📬 請願・陳情</span><span class="toc-arr">›</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-hd"><h2 class="sec-ttl">情報公開</h2></div>
+    <div class="toc-card">
+      <div class="toc-item" onclick="goto('gijiroku')"><span class="toc-label">🔍 会議録</span><span class="toc-arr">›</span></div>
+      <div class="toc-item" onclick="goto('seimu')"><span class="toc-label">💴 政務活動費</span><span class="toc-arr">›</span></div>
+      <div class="toc-item" onclick="goto('hokoku')"><span class="toc-label">📊 調査・研修等報告書</span><span class="toc-arr">›</span></div>
+      <div class="toc-item" onclick="goto('gaiyou')"><span class="toc-label">📈 鹿追町と議会の概要</span><span class="toc-arr">›</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-hd"><h2 class="sec-ttl">広報・参加</h2></div>
+    <div class="toc-card">
+      <div class="toc-item" onclick="goto('dayori')"><span class="toc-label">📰 議会だより</span><span class="toc-arr">›</span></div>
+      <div class="toc-item" onclick="goto('chukei')"><span class="toc-label">📡 議会中継</span><span class="toc-arr">›</span></div>
+      <div class="toc-item" onclick="goto('machinaka')"><span class="toc-label">💬 まちなか会議</span><span class="toc-arr">›</span></div>
+      <div class="toc-item" onclick="goto('oshirase')"><span class="toc-label">📋 議会からのお知らせ</span><span class="toc-arr">›</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-hd"><h2 class="sec-ttl">その他</h2></div>
+    <div class="toc-card">
+      <div class="toc-item" onclick="goto('calendar')"><span class="toc-label">📅 議会カレンダー</span><span class="toc-arr">›</span></div>
+      <div class="toc-item" onclick="goto('contact')"><span class="toc-label">📩 議会へのお問い合わせ</span><span class="toc-arr">›</span></div>
+    </div>
   </div>
 </div>
 
