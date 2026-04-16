@@ -1229,7 +1229,7 @@ function loadNews() {
           return;
         }
         
-        const limit = id === 'news-list-home' ? 3 : 10;
+        const limit = data.length;
         el.innerHTML = data.slice(0, limit).map((item, i) => {
           const badgeHtml = i === 0 && id === 'news-list-home'
             ? '<span class="badge">新着</span>'
