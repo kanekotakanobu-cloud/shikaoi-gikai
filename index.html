@@ -1305,7 +1305,7 @@ function formatDateJP2(d) {
   return `${parts[0]}年${parseInt(parts[1])}月${parseInt(parts[2])}日`;
 }
 
-// loadArchive は別のgoto上書きで呼び出し済み
+
 </script>
 
 
@@ -1338,17 +1338,36 @@ function loadSchedule() {
     });
 }
 
-// 中継ページを開いた時に読み込む
-const _origGoto = window.goto;
-window.goto = function(id) {
-  _origGoto(id);
-  if (id === 'chukei') {
-    setTimeout(() => {
-      loadSchedule();
-      loadArchive();
-    }, 100);
-  }
-};
+
+</script>
+
+
+<script>
+// ── ページ遷移フック（中継ページ） ──
+document.addEventListener('DOMContentLoaded', function() {
+  const _baseGoto = window.goto;
+  window.goto = function(id) {
+    _baseGoto(id);
+    if (id === 'chukei') {
+      setTimeout(function() {
+        if (typeof loadSchedule === 'function') loadSchedule();
+        if (typeof loadArchive === 'function') loadArchive();
+      }, 200);
+    }
+  };
+  
+  // タブバーの中継ボタン直接クリック対応
+  document.querySelectorAll('.ti').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      if (this.querySelector('.ti-lbl') && this.querySelector('.ti-lbl').textContent === '中継') {
+        setTimeout(function() {
+          if (typeof loadSchedule === 'function') loadSchedule();
+          if (typeof loadArchive === 'function') loadArchive();
+        }, 200);
+      }
+    });
+  });
+});
 </script>
 
 </body>
